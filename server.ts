@@ -691,21 +691,19 @@ async function postToAppsScript(webhookUrl: string, payload: unknown): Promise<v
     }
 
     const text = await res.text();
+    let parsed: { ok?: boolean; error?: string } | null = null;
     try {
-      const parsed = JSON.parse(text) as { ok?: boolean; error?: string };
-      if (parsed && parsed.ok === false) {
-        throw new Error(parsed.error || 'Apps Script báo lỗi khi ghi Google Sheet.');
-      }
-    } catch (err) {
-      if (err instanceof Error && err.message.includes('Apps Script')) {
-        throw err;
-      }
-      // HTML or non-JSON response when permissions are wrong
-      if (text.toLowerCase().includes('accounts.google.com') || text.toLowerCase().includes('sign in')) {
-        throw new Error(
-          'Apps Script chưa bật quyền truy cập "Bất kỳ ai (Anyone)". Hãy Deploy lại Web App với quyền Anyone.'
-        );
-      }
+      parsed = JSON.parse(text) as { ok?: boolean; error?: string };
+    } catch {
+      throw new Error(
+        'Apps Script chưa trả về JSON hợp lệ (hãy kiểm tra lại trong Apps Script: dán đúng mã doPost/doGet, chọn Triển khai Phiên bản mới và Người có quyền truy cập = "Bất kỳ ai (Anyone)").'
+      );
+    }
+    if (!parsed || typeof parsed !== 'object') {
+      throw new Error('Phản hồi từ Google Apps Script không hợp lệ.');
+    }
+    if (parsed.ok === false) {
+      throw new Error(parsed.error || 'Apps Script báo lỗi khi ghi Google Sheet.');
     }
     return;
   }
