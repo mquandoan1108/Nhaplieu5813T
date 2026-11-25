@@ -1,0 +1,6 @@
+{
+  "name": "Nhật Ký Vận Hành Xe Tải 5T · 8T · 13T",
+  "description": "Ứng dụng quản lý nhật ký vận hành đội xe tải 5T, 8T và 13T (54 đầu xe), theo dõi MCX, số Km (Odo), giờ lạnh lũy kế, xuất Excel/CSV và đồng bộ Google Sheets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
