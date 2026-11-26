@@ -408,9 +408,9 @@ export default function App() {
       <div className={isDispatcher ? 'lg:pl-64' : ''}>
         {/* Top Bar */}
         <header className="sticky top-0 z-20 flex h-14 items-center justify-between gap-4 border-b border-slate-200 bg-white/95 px-4 backdrop-blur-xs sm:h-16 sm:px-6">
-          <div className="flex min-w-0 items-center gap-3">
+          <div className="flex min-w-0 flex-col justify-center sm:flex-row sm:items-center sm:gap-3">
             <span
-              className={`text-sm font-bold text-slate-900 whitespace-nowrap ${
+              className={`text-sm font-bold leading-tight text-slate-900 whitespace-nowrap ${
                 isDispatcher ? 'lg:hidden' : 'sm:text-base'
               }`}
             >
@@ -421,6 +421,20 @@ export default function App() {
                 {currentTitle}
               </span>
             )}
+            <span
+              className="hidden h-4 w-px shrink-0 bg-slate-200 sm:inline-block"
+              aria-hidden="true"
+            />
+            <span className="inline-flex items-center gap-1.5 truncate text-[11px] font-medium leading-tight text-emerald-700 sm:text-xs">
+              <span
+                className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500"
+                aria-hidden="true"
+              />
+              <span className="truncate">
+                Phát triển bởi{' '}
+                <span className="font-semibold text-emerald-800">Minh Quan Doan</span>
+              </span>
+            </span>
           </div>
 
           <div className="flex items-center gap-2.5 shrink-0">
